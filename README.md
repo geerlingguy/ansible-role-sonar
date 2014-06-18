@@ -21,6 +21,12 @@ Directory where downloaded files will be temporarily stored.
 
 The URL from which SonarQube will be downloaded, and the resulting directory name (should match the download archive, without the archive extension).
 
+    sonar_web_host: ""
+    sonar_web_port: ""
+    sonar_web_context: ""
+
+The hostname/IP address, port, and context through which SonarQube will be accessed. If none are provided, defaults are used.
+
     sonar_mysql_host: localhost
     sonar_mysql_port: 3306
     sonar_mysql_database: sonar

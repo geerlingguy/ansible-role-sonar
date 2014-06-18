@@ -16,9 +16,15 @@
 # These settings are ignored when the war file is deployed to a JEE server.
 #---------------------------------------------------------
 # Listen host/port and context path (for example / or /sonar). Default values are 0.0.0.0:9000/.
-#sonar.web.host:                           0.0.0.0
-#sonar.web.port:                           9000
-#sonar.web.context:                        /
+{% if sonar_web_host %}
+sonar.web.host:                           {{ sonar_web_host }}
+{% endif %}
+{% if sonar_web_port %}
+sonar.web.port:                           {{ sonar_web_port }}
+{% endif %}
+{% if sonar_web_context %}
+sonar.web.context:                        {{ sonar_web_context }}
+{% endif %}
 
 # Log HTTP requests. Deactivated by default.
 #sonar.web.jettyRequestLogs: ../../logs/jetty-yyyy_mm_dd.request.log

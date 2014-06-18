@@ -5,9 +5,13 @@ workspace: /root
 sonar_download_url: http://dist.sonar.codehaus.org/sonarqube-4.3.1.zip
 sonar_version_directory: sonarqube-4.3.1
 
+sonar_web_host: ""
+sonar_web_port: ""
+sonar_web_context: ""
+
 # MySQL database connection details.
 sonar_mysql_host: localhost
-sonar_mysql_port: 3306
+sonar_mysql_port: "3306"
 sonar_mysql_database: sonar
 sonar_mysql_user: sonar
 sonar_mysql_password: sonar
