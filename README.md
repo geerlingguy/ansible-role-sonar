@@ -35,6 +35,13 @@ The hostname/IP address, port, and context through which SonarQube will be acces
 
 MySQL connection details.
 
+    sonar_mysql_allowed_hosts:
+      - 127.0.0.1
+      - ::1
+      - localhost
+
+A list of hosts from which MySQL connections to the sonar database should be allowed.
+
 ## Dependencies
 
   - geerlingguy.java

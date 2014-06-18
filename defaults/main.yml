@@ -15,3 +15,7 @@ sonar_mysql_port: "3306"
 sonar_mysql_database: sonar
 sonar_mysql_user: sonar
 sonar_mysql_password: sonar
+sonar_mysql_allowed_hosts:
+  - 127.0.0.1
+  - ::1
+  - localhost

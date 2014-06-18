@@ -10,11 +10,7 @@
     host={{ item }}
     priv={{ sonar_mysql_database }}.*:ALL
     password={{ sonar_mysql_password }}
-  with_items:
-    - "%"
-    - 127.0.0.1
-    - ::1
-    - localhost
+  with_items: sonar_mysql_allowed_hosts
 
 - name: Download Sonar.
   get_url: >
