@@ -1,7 +1,9 @@
 ---
 workspace: /root
 
-sonar_version: "3.7.4"
+# 3.7.4 is an LTS release.
+# sonar_version: "3.7.4"
+sonar_version: "4.3.1"
 
 # MySQL database connection details.
 sonar_mysql_host: localhost
