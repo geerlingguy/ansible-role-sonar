@@ -16,9 +16,10 @@ Available variables are listed below, along with default values (see `vars/main.
 
 Directory where downloaded files will be temporarily stored.
 
-    sonar_version: "3.7.4"
+    sonar_download_url: http://dist.sonar.codehaus.org/sonarqube-4.3.1.zip
+    sonar_version_directory: sonarqube-4.3.1
 
-The version of SonarQube to install.
+The URL from which SonarQube will be downloaded, and the resulting directory name (should match the download archive, without the archive extension).
 
     sonar_mysql_host: localhost
     sonar_mysql_port: 3306

@@ -18,19 +18,19 @@
 
 - name: Download Sonar.
   get_url: >
-    url=http://dist.sonar.codehaus.org/sonar-{{ sonar_version }}.zip
-    dest={{ workspace }}/sonar-{{ sonar_version }}.zip
+    url={{ sonar_download_url }}
+    dest={{ workspace }}/{{ sonar_version_directory }}.zip
 
 - name: Unzip Sonar.
   shell: >
     chdir={{ workspace }}
-    unzip -o {{ workspace }}/sonar-{{ sonar_version }}.zip
+    unzip -o {{ workspace }}/{{ sonar_version_directory }}.zip
     creates=/usr/local/sonar/COPYING
   sudo: yes
 
 - name: Move Sonar into place.
   shell: >
-    mv {{ workspace }}/sonar-{{ sonar_version }} /usr/local/sonar
+    mv {{ workspace }}/{{ sonar_version_directory }} /usr/local/sonar
     creates=/usr/local/sonar/COPYING
 
 - name: Copy sonar properties file.
