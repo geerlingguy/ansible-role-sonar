@@ -2,4 +2,6 @@
 - hosts: localhost
   remote_user: root
   roles:
+    - geerlingguy.java
+    - geerlingguy.mysql
     - ansible-role-sonar
