@@ -1,0 +1,55 @@
+---
+- name: Create a database for Sonar.
+  mysql_db: >
+    name={{ sonar_mysql_database }}
+    state=present
+
+- name: Create a sonar user.
+  mysql_user: >
+    name={{ sonar_mysql_user }}
+    host={{ item }}
+    priv={{ sonar_mysql_database }}.*:ALL
+    password={{ sonar_mysql_password }}
+  with_items:
+    - "%"
+    - 127.0.0.1
+    - ::1
+    - localhost
+
+- name: Download Sonar.
+  get_url: >
+    url=http://dist.sonar.codehaus.org/sonar-{{ sonar_version }}.zip
+    dest={{ workspace }}/sonar-{{ sonar_version }}.zip
+
+- name: Unzip Sonar.
+  shell: >
+    chdir={{ workspace }}
+    unzip -o {{ workspace }}/sonar-{{ sonar_version }}.zip
+    creates=/usr/local/sonar/COPYING
+  sudo: yes
+
+- name: Move Sonar into place.
+  shell: >
+    mv {{ workspace }}/sonar-{{ sonar_version }} /usr/local/sonar
+    creates=/usr/local/sonar/COPYING
+
+- name: Copy sonar properties file.
+  template: >
+    src=sonar.properties.j2
+    dest=/usr/local/sonar/conf/sonar.properties
+  notify: restart sonar
+
+- name: Add sonar symlink to /usr/bin.
+  file: >
+    src=/usr/local/sonar/bin/linux-x86-64/sonar.sh
+    dest=/usr/bin/sonar
+    state=link
+
+- name: Add Sonar init script.
+  copy: >
+    src=sonar-init_d.txt
+    dest=/etc/init.d/sonar
+    mode=755
+
+- name: Ensure Sonar is running and set to start on boot.
+  service: name=sonar state=started enabled=yes
