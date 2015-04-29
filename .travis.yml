@@ -34,5 +34,8 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
+  # SonarQube can take a while to start initially.
+  - sleep 25
+
   # Check if SonarQube responds to requests on port 9000.
   - curl http://localhost:9000/
