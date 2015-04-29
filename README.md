@@ -16,8 +16,8 @@ Available variables are listed below, along with default values:
 
 Directory where downloaded files will be temporarily stored.
 
-    sonar_download_url: http://dist.sonar.codehaus.org/sonarqube-4.3.1.zip
-    sonar_version_directory: sonarqube-4.3.1
+    sonar_download_url: http://dist.sonar.codehaus.org/sonarqube-4.5.4.zip
+    sonar_version_directory: sonarqube-4.5.4
 
 The URL from which SonarQube will be downloaded, and the resulting directory name (should match the download archive, without the archive extension).
 
