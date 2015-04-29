@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  remote_user: root
+
+  vars:
+    # Use default log file size so Travis CI VM allows MySQL restart.
+    mysql_innodb_log_file_size: "5M"
+
+    # SonarQube 5.x requires Java 7+
+    java_packages: ['openjdk-7-jdk']
+
+    # Latest version of SonarQube, from http://www.sonarqube.org/downloads/
+    sonar_download_url: http://dist.sonar.codehaus.org/sonarqube-5.1.zip
+    sonar_version_directory: sonarqube-5.1
+
+  roles:
+    - geerlingguy.java
+    - geerlingguy.mysql
+    - ansible-role-sonar

@@ -6,7 +6,7 @@ An Ansible Role that installs [SonarQube](http://www.sonarqube.org/) on RedHat/C
 
 ## Requirements
 
-Requires the `unzip` utility to be installed on the server.
+Requires the `unzip` utility to be installed on the server. SonarQube 5.x+ requires Java 1.7+.
 
 ## Role Variables
 

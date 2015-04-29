@@ -1,7 +1,7 @@
 ---
 workspace: /root
 
-# 4.5.4 is an LTS release.
+# 4.5.4 is the latest LTS release.
 sonar_download_url: http://dist.sonar.codehaus.org/sonarqube-4.5.4.zip
 sonar_version_directory: sonarqube-4.5.4
 
