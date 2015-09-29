@@ -1,7 +1,7 @@
 ---
 dependencies:
-  - { role: geerlingguy.java }
-  - { role: geerlingguy.mysql }
+  - geerlingguy.java
+  - geerlingguy.mysql
 
 galaxy_info:
   author: geerlingguy

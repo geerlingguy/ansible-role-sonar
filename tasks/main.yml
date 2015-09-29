@@ -6,7 +6,7 @@
 
 - name: Create a sonar user.
   mysql_user:
-    name: "{{ sonar_mysql_user }}"
+    name: "{{ sonar_mysql_username }}"
     host: "{{ item }}"
     priv: "{{ sonar_mysql_database }}.*:ALL"
     password: "{{ sonar_mysql_password }}"
@@ -29,11 +29,7 @@
     mv {{ workspace }}/{{ sonar_version_directory }} /usr/local/sonar
     creates=/usr/local/sonar/COPYING
 
-- name: Copy sonar properties file.
-  template:
-    src: sonar.properties.j2
-    dest: /usr/local/sonar/conf/sonar.properties
-  notify: restart sonar
+- include: configure.yml
 
 - name: Add sonar symlinks for service management.
   file:

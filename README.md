@@ -21,26 +21,19 @@ Directory where downloaded files will be temporarily stored.
 
 The URL from which SonarQube will be downloaded, and the resulting directory name (should match the download archive, without the archive extension).
 
-    sonar_web_host: ""
-    sonar_web_port: ""
-    sonar_web_context: ""
-
-The hostname/IP address, port, and context through which SonarQube will be accessed. If none are provided, defaults are used.
-
-    sonar_mysql_host: localhost
-    sonar_mysql_port: 3306
-    sonar_mysql_database: sonar
-    sonar_mysql_user: sonar
+    sonar_mysql_username: sonar
     sonar_mysql_password: sonar
-
-MySQL connection details.
-
+    
+    sonar_mysql_host: localhost
+    sonar_mysql_port: "3306"
+    sonar_mysql_database: sonar
+    
     sonar_mysql_allowed_hosts:
       - 127.0.0.1
       - ::1
       - localhost
 
-A list of hosts from which MySQL connections to the sonar database should be allowed.
+JDBC settings for a connection to a MySQL database. Defaults presume the database resides on localhost and is only accessible on the SonarQube server itself.
 
 ## Dependencies
 
@@ -51,7 +44,7 @@ A list of hosts from which MySQL connections to the sonar database should be all
 
     - hosts: all
       roles:
-        - { role: geerlingguy.sonar }
+        - geerlingguy.sonar
 
 ## License
 
