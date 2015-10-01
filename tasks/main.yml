@@ -18,15 +18,15 @@
     dest: "{{ workspace }}/{{ sonar_version_directory }}.zip"
 
 - name: Unzip Sonar.
-  shell: >
-    chdir={{ workspace }}
-    unzip -o {{ workspace }}/{{ sonar_version_directory }}.zip
-    creates=/usr/local/sonar/COPYING
-  sudo: yes
+  unarchive:
+    src: "{{ workspace }}/{{ sonar_version_directory }}.zip"
+    dest: /usr/local/
+    copy: no
+    creates: /usr/local/sonar/COPYING
 
 - name: Move Sonar into place.
   shell: >
-    mv {{ workspace }}/{{ sonar_version_directory }} /usr/local/sonar
+    mv /usr/local/{{ sonar_version_directory }} /usr/local/sonar
     creates=/usr/local/sonar/COPYING
 
 - include: configure.yml
@@ -42,3 +42,6 @@
 
 - name: Ensure Sonar is running and set to start on boot.
   service: name=sonar state=started enabled=yes
+
+- name: Make sure Sonar is responding on the configured port.
+  wait_for: port=9000 delay=3 timeout=300
