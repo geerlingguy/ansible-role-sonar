@@ -10,8 +10,8 @@
     java_packages: ['openjdk-7-jdk']
 
     # Latest version of SonarQube, from http://www.sonarqube.org/downloads/
-    sonar_download_url: https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.1.2.zip
-    sonar_version_directory: sonarqube-5.1.2
+    sonar_download_url: https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.3.zip
+    sonar_version_directory: sonarqube-5.3
 
   roles:
     - geerlingguy.java
