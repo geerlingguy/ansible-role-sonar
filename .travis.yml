@@ -1,4 +1,5 @@
 ---
+sudo: required
 language: python
 python: "2.7"
 
@@ -40,3 +41,6 @@ script:
 
   # Check if SonarQube responds to requests on port 9000.
   - curl http://localhost:9000/
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
