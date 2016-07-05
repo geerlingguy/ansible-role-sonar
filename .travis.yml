@@ -30,8 +30,10 @@ script:
   - "ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo"
 
   # Run the role/playbook again, checking to make sure it's idempotent.
+  - idempotence=$(mktemp)
+  - ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo | tee -a ${idempotence}
   - >
-    ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo
+    tail ${idempotence}
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
