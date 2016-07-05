@@ -46,6 +46,8 @@ JDBC settings for a connection to a MySQL database. Defaults presume the databas
       roles:
         - geerlingguy.sonar
 
+Browse the results at http://localhost:9000 (default System administrator credentials are admin/admin)
+
 ## License
 
 MIT / BSD
