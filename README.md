@@ -21,9 +21,9 @@ Available variables are listed below, along with default values:
 
 Directory where downloaded files will be temporarily stored.
 
-    sonar_validate_certs: no
+    sonar_download_validate_certs: no
 
-Certificates verification. If no, SSL certificates will not be validated.
+Controls whether to validate certificates when downloading the GitLab installation repository install script.
 
     sonar_download_url: http://dist.sonar.codehaus.org/sonarqube-4.5.4.zip
     sonar_version_directory: sonarqube-4.5.4
