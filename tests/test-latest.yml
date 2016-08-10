@@ -5,6 +5,11 @@
     # Latest version of SonarQube, from http://www.sonarqube.org/downloads/
     sonar_version: 5.6.1
 
+  pre_tasks:
+    - name: Add repository for OpenJDK 8.
+      apt_repository: repo='ppa:openjdk-r/ppa'
+      when: ansible_os_family == "Debian" and ansible_distribution_version == "14.04"
+
   roles:
     - role: geerlingguy.java
       when: "ansible_os_family == 'RedHat'"
