@@ -6,7 +6,10 @@ An Ansible Role that installs [SonarQube](http://www.sonarqube.org/) on RedHat/C
 
 ## Requirements
 
-Requires the `unzip` utility to be installed on the server. SonarQube 5.x+ requires Java 1.7+.
+Requires the `unzip` utility to be installed on the server.
+
+SonarQube 5.0-5.5 requires Java 1.7+.
+SonarQube 5.6+ requires Java 1.8+.
 
 ## Role Variables
 
@@ -45,6 +48,8 @@ JDBC settings for a connection to a MySQL database. Defaults presume the databas
     - hosts: all
       roles:
         - geerlingguy.sonar
+
+Browse the results at http://localhost:9000 (default System administrator credentials are admin/admin)
 
 ## License
 
