@@ -7,11 +7,10 @@
     mysql_innodb_log_file_size: "5M"
 
     # SonarQube 5.x requires Java 7+
-    java_packages: ['openjdk-7-jdk']
+    java_packages: ['openjdk-8-jdk']
 
     # Latest version of SonarQube, from http://www.sonarqube.org/downloads/
-    sonar_download_url: https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.3.zip
-    sonar_version_directory: sonarqube-5.3
+    sonar_version: 5.6.1
 
   roles:
     - geerlingguy.java
