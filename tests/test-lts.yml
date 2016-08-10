@@ -1,12 +1,7 @@
 ---
-- hosts: localhost
-  remote_user: root
-
-  vars:
-    # Use default log file size so Travis CI VM allows MySQL restart.
-    mysql_innodb_log_file_size: "5M"
+- hosts: all
 
   roles:
     - geerlingguy.java
     - geerlingguy.mysql
-    - ansible-role-sonar
+    - role_under_test
