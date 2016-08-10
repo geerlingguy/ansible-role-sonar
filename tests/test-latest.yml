@@ -5,13 +5,16 @@
     # Latest version of SonarQube, from http://www.sonarqube.org/downloads/
     sonar_version: 5.6.1
 
-  pre_tasks:
-    set_fact:
-      # SonarQube 5.x requires Java 7+
-      java_packages: ['openjdk-8-jdk']
-    when: ansible_os_family == 'Debian'
-
   roles:
-    - geerlingguy.java
+    - role: geerlingguy.java
+      when: "ansible_os_family == 'RedHat'"
+      java_packages:
+        - java-1.8.0-openjdk
+
+    - role: geerlingguy.java
+      when: "ansible_os_family == 'Debian'"
+      java_packages:
+        - openjdk-8-jdk
+
     - geerlingguy.mysql
     - role_under_test
