@@ -67,7 +67,7 @@ script:
   # Check MySQL settings.
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ls -lah /var/log'
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ls -lah /var/log/mysql'
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/mysql/mysql.err'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/mysql/error.log'
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/mysql.err'
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/mysql.log'
 
@@ -77,7 +77,7 @@ after_success:
 
 after_failure:
   # Check MySQL settings.
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/mysql/mysql.err'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/mysql/error.log'
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/mysql.err'
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/mysql.log'
 
