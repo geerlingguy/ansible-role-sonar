@@ -9,6 +9,7 @@ RUN apt-get update \
     && rm -Rf /var/lib/apt/lists/* \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
+RUN apt-get remove -y --purge apparmor
 # Install Ansible
 RUN apt-add-repository -y ppa:ansible/ansible \
     && apt-get update \
