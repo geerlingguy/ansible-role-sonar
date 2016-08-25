@@ -64,6 +64,11 @@ script:
   # Make sure SonarQube is running.
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm curl http://localhost:9000/'
 
+  # Check MySQL settings.
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat ~/.my.cnf'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/mysql.err'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/mysql.log'
+
 after_success:
   # Clean up.
   - 'sudo docker stop "$(cat ${container_id})"'
