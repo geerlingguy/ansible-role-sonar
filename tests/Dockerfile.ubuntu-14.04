@@ -5,11 +5,10 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-       software-properties-common git \
+       software-properties-common git curl \
     && rm -Rf /var/lib/apt/lists/* \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
-RUN apt-get remove -y --purge apparmor
 # Install Ansible
 RUN apt-add-repository -y ppa:ansible/ansible \
     && apt-get update \
