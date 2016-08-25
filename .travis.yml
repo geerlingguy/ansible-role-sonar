@@ -70,9 +70,9 @@ after_success:
 
 after_failure:
   # Check MySQL settings.
-  - cat ~/.my.cnf
-  - sudo cat /var/log/mysql.err
-  - sudo cat /var/log/mysql.log
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat ~/.my.cnf'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/mysql.err'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/mysql.log'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
