@@ -65,7 +65,9 @@ script:
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm curl http://localhost:9000/'
 
   # Check MySQL settings.
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat ~/.my.cnf'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm sudo cat ~/.my.cnf'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ls -lah /var/log'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ls -lah /var/log/mysql'
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/mysql.err'
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /var/log/mysql.log'
 
