@@ -1,6 +1,10 @@
 ---
 - hosts: all
 
+  pre_tasks:
+    - name: Install curl.
+      package: name=curl state=present
+
   roles:
     - geerlingguy.java
     - geerlingguy.mysql
