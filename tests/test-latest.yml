@@ -6,8 +6,11 @@
     sonar_version: 5.6.1
 
   pre_tasks:
-    - name: Install curl.
-      package: name=curl state=present
+    - name: Install dependencies.
+      package: "name={{ item }} state=present"
+      with_items:
+        - curl
+        - unzip
 
     - name: Add repository for OpenJDK 8.
       apt_repository: repo='ppa:openjdk-r/ppa'
