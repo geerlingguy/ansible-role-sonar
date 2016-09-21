@@ -18,3 +18,5 @@ sonar_mysql_allowed_hosts:
   - "127.0.0.1"
   - "::1"
   - "localhost"
+
+sonar_web_context: ''
