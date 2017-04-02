@@ -6,9 +6,9 @@ env:
     playbook: test-latest.yml
   - distro: centos7
     playbook: test-lts.yml
-  - distro: ubuntu1404
+  - distro: ubuntu1604
     playbook: test-latest.yml
-  - distro: ubuntu1404
+  - distro: ubuntu1604
     playbook: test-lts.yml
 
 script:
