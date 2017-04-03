@@ -1,48 +1,33 @@
 ---
-sudo: required
-language: python
-python: "2.7"
+services: docker
 
 env:
-  - SITE=test-lts.yml
-  - SITE=test-latest.yml
-
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -y curl
-  - sudo apt-get remove --purge 'mysql*'
-
-install:
-  # Install Ansible.
-  - pip install ansible
-
-  # Add ansible.cfg to pick up roles path.
-  - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
-
-  # Install required dependencies.
-  - ansible-galaxy install geerlingguy.java geerlingguy.mysql
+  - distro: centos7
+    playbook: test-latest.yml
+  - distro: centos7
+    playbook: test-lts.yml
+  - distro: ubuntu1604
+    playbook: test-latest.yml
+  - distro: ubuntu1604
+    playbook: test-lts.yml
 
 script:
-  # Check the role/playbook's syntax.
-  - "ansible-playbook -i tests/inventory tests/$SITE --syntax-check"
+  # Configure test script so we can run extra tests after playbook is run.
+  - export container_id=$(date +%s)
+  - export cleanup=false
 
-  # Run the role/playbook with ansible-playbook.
-  - "ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo"
+  # Download test shim.
+  - wget -O ${PWD}/tests/test.sh https://gist.githubusercontent.com/geerlingguy/73ef1e5ee45d8694570f334be385e181/raw/
+  - chmod +x ${PWD}/tests/test.sh
 
-  # Run the role/playbook again, checking to make sure it's idempotent.
-  - idempotence=$(mktemp)
-  - ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo | tee -a ${idempotence}
-  - >
-    tail ${idempotence}
-    | grep -q 'changed=0.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
+  # Run tests.
+  - ${PWD}/tests/test.sh
 
   # SonarQube can take a while to start initially.
   - sleep 20
 
-  # Check if SonarQube responds to requests on port 9000.
-  - curl http://localhost:9000/
+  # Make sure SonarQube is running.
+  - 'docker exec --tty ${container_id} env TERM=xterm curl http://localhost:9000/'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

@@ -1,12 +1,19 @@
 ---
-- hosts: localhost
-  remote_user: root
+- hosts: all
 
-  vars:
-    # Use default log file size so Travis CI VM allows MySQL restart.
-    mysql_innodb_log_file_size: "5M"
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=yes cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+      changed_when: false
+
+    - name: Install dependencies.
+      package: "name={{ item }} state=present"
+      with_items:
+        - curl
+        - unzip
 
   roles:
     - geerlingguy.java
     - geerlingguy.mysql
-    - ansible-role-sonar
+    - role_under_test

@@ -11,6 +11,8 @@ Requires the `unzip` utility to be installed on the server. Also, different Sona
   - SonarQube 5.0-5.5 requires Java 1.7+
   - SonarQube 5.6+ requires Java 1.8+
 
+Finally, recent versions of SonarQube also require MySQL 5.6 or later.
+
 ## Role Variables
 
 Available variables are listed below, along with default values:
@@ -57,4 +59,4 @@ MIT / BSD
 
 ## Author Information
 
-This role was created in 2014 by [Jeff Geerling](http://jeffgeerling.com/), author of [Ansible for DevOps](http://ansiblefordevops.com/).
+This role was created in 2014 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
