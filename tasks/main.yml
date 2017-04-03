@@ -31,17 +31,35 @@
 
 - include: configure.yml
 
-- name: Add sonar symlinks for service management.
+- name: Symlink sonar bin.
   file:
     src: /usr/local/sonar/bin/linux-x86-64/sonar.sh
-    dest: "{{ item }}"
+    dest: /usr/bin/sonar
     state: link
-  with_items:
-    - /usr/bin/sonar
-    - /etc/init.d/sonar
+  register: sonar_symlink
+
+- name: Add sonar as init script for service management.
+  file:
+    src: /usr/local/sonar/bin/linux-x86-64/sonar.sh
+    dest: /etc/init.d/sonar
+    state: link
+  when: "ansible_service_mgr != 'systemd'"
+
+- name: Copy SonarQube systemd unit file into place (for systemd systems).
+  template:
+    src: sonar.unit.j2
+    dest: /etc/systemd/system/sonar.service
+    owner: root
+    group: root
+    mode: 0755
+  when: "ansible_service_mgr == 'systemd'"
 
 - name: Ensure Sonar is running and set to start on boot.
   service: name=sonar state=started enabled=yes
+
+- name: Allow Sonar time to build on first start.
+  pause: seconds=180
+  when: sonar_symlink.changed
 
 - name: Make sure Sonar is responding on the configured port.
   wait_for: port=9000 delay=3 timeout=300
