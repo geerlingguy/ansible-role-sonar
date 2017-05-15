@@ -30,6 +30,10 @@ Controls whether to validate certificates when downloading SonarQube.
 
 The URL from which SonarQube will be downloaded, and the resulting directory name (should match the download archive, without the archive extension).
 
+    sonar_web_context: ''
+
+The value of `sonar.web.context`. Setting this to something like `/sonar` allows you to set the context where Sonar can be accessed (e.g. `hostname/sonar` instead of `hostname`).
+
     sonar_mysql_username: sonar
     sonar_mysql_password: sonar
     
