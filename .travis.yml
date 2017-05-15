@@ -10,6 +10,8 @@ env:
     playbook: test-latest.yml
   - distro: ubuntu1604
     playbook: test-lts.yml
+  - distro: ubuntu1604
+    playbook: test-web_context.yml
 
 script:
   # Configure test script so we can run extra tests after playbook is run.
