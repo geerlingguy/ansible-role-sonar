@@ -16,6 +16,7 @@
   get_url:
     url: "{{ sonar_download_url }}"
     dest: "{{ workspace }}/{{ sonar_version_directory }}.zip"
+    validate_certs: "{{ sonar_download_validate_certs }}"
 
 - name: Unzip Sonar.
   unarchive:

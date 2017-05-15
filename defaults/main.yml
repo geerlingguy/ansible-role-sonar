@@ -1,5 +1,6 @@
 ---
 workspace: /root
+sonar_download_validate_certs: yes
 
 # Default to the latest LTS release.
 sonar_version: 4.5.6
