@@ -61,6 +61,7 @@
 - name: Allow Sonar time to build on first start.
   pause: seconds=180
   when: sonar_symlink.changed
+  tags: ['skip_ansible_lint']
 
 - name: Make sure Sonar is responding on the configured port.
   wait_for: port=9000 delay=3 timeout=300
