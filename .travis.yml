@@ -1,35 +1,40 @@
 ---
+language: python
 services: docker
 
 env:
-  - distro: centos7
-    playbook: test-latest.yml
-  - distro: centos7
-    playbook: test-lts.yml
-  - distro: ubuntu1604
-    playbook: test-latest.yml
-  - distro: ubuntu1604
-    playbook: test-lts.yml
-  - distro: ubuntu1604
-    playbook: test-web_context.yml
+  global:
+    - ROLE_NAME: sonar
+  matrix:
+    # LTS.
+    - MOLECULE_DISTRO: centos7
+      MOLECULE_DOCKER_COMMAND: /usr/lib/systemd/systemd
+    - MOLECULE_DISTRO: ubuntu1604
+
+    # Latest.
+    - MOLECULE_DISTRO: centos7
+      MOLECULE_DOCKER_COMMAND: /usr/lib/systemd/systemd
+      MOLECULE_PLAYBOOK: playbook-latest.yml
+    - MOLECULE_DISTRO: ubuntu1604
+      MOLECULE_PLAYBOOK: playbook-latest.yml
+
+    # Web Context.
+    - MOLECULE_DISTRO: ubuntu1604
+      MOLECULE_PLAYBOOK: playbook-web-context.yml
+
+install:
+  # Install test dependencies.
+  - pip install molecule docker
+
+before_script:
+  # Use actual Ansible Galaxy role name for the project directory.
+  - cd ../
+  - mv ansible-role-$ROLE_NAME geerlingguy.$ROLE_NAME
+  - cd geerlingguy.$ROLE_NAME
 
 script:
-  # Configure test script so we can run extra tests after playbook is run.
-  - export container_id=$(date +%s)
-  - export cleanup=false
-
-  # Download test shim.
-  - wget -O ${PWD}/tests/test.sh https://gist.githubusercontent.com/geerlingguy/73ef1e5ee45d8694570f334be385e181/raw/
-  - chmod +x ${PWD}/tests/test.sh
-
   # Run tests.
-  - ${PWD}/tests/test.sh
-
-  # SonarQube can take a while to start initially.
-  - sleep 20
-
-  # Make sure SonarQube is running.
-  - 'docker exec --tty ${container_id} env TERM=xterm curl http://localhost:9000/'
+  - molecule test
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

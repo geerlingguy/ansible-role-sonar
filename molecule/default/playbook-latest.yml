@@ -1,5 +1,7 @@
 ---
-- hosts: all
+- name: Converge
+  hosts: all
+  become: true
 
   vars:
     # Latest version of SonarQube, from http://www.sonarqube.org/downloads/
@@ -7,19 +9,22 @@
 
   pre_tasks:
     - name: Update apt cache.
-      apt: update_cache=yes cache_valid_time=600
+      apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
       changed_when: false
 
     - name: Install dependencies.
-      package: "name={{ item }} state=present"
-      with_items:
-        - curl
-        - unzip
+      package:
+        name:
+          - curl
+          - unzip
+        state: present
 
     - name: Add repository for OpenJDK 8 (Ubuntu 14).
       apt_repository: repo='ppa:openjdk-r/ppa'
-      when: ansible_os_family == "Debian" and ansible_distribution_version == "14.04"
+      when:
+        - ansible_os_family == "Debian"
+        - ansible_distribution_version == "14.04"
 
     - name: Install the MySQL repo (RedHat).
       yum:
@@ -48,5 +53,15 @@
       java_packages:
         - openjdk-8-jdk
 
-    - geerlingguy.mysql
-    - role_under_test
+    - role: geerlingguy.mysql
+    - role: geerlingguy.sonar
+
+  post_tasks:
+    - name: Ensure SonarQube is running.
+      uri:
+        url: "http://127.0.0.1:9000/"
+        status_code: 200
+      register: result
+      until: result.status == 200
+      retries: 60
+      delay: 1

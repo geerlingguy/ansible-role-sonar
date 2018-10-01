@@ -21,7 +21,7 @@ Available variables are listed below, along with default values:
 
 Directory where downloaded files will be temporarily stored.
 
-    sonar_download_validate_certs: yes
+    sonar_download_validate_certs: true
 
 Controls whether to validate certificates when downloading SonarQube.
 

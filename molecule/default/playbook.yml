@@ -1,0 +1,31 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=true cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+
+    - name: Install dependencies.
+      package:
+        name:
+          - curl
+          - unzip
+        state: present
+
+  roles:
+    - role: geerlingguy.java
+    - role: geerlingguy.mysql
+    - role: geerlingguy.sonar
+
+  post_tasks:
+    - name: Ensure SonarQube is running.
+      uri:
+        url: "http://127.0.0.1:9000/"
+        status_code: 200
+      register: result
+      until: result.status == 200
+      retries: 60
+      delay: 1

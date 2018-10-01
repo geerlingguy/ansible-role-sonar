@@ -22,11 +22,11 @@
   unarchive:
     src: "{{ workspace }}/{{ sonar_version_directory }}.zip"
     dest: /usr/local/
-    copy: no
+    copy: false
     creates: /usr/local/sonar/COPYING
 
 - name: Move Sonar into place.
-  shell: >
+  command: >
     mv /usr/local/{{ sonar_version_directory }} /usr/local/sonar
     creates=/usr/local/sonar/COPYING
 
