@@ -8,16 +8,16 @@ env:
   matrix:
     # LTS.
     - MOLECULE_DISTRO: centos7
-    - MOLECULE_DISTRO: ubuntu1804
+    - MOLECULE_DISTRO: ubuntu1604
 
     # Latest.
     - MOLECULE_DISTRO: centos7
       MOLECULE_PLAYBOOK: playbook-latest.yml
-    - MOLECULE_DISTRO: ubuntu1804
+    - MOLECULE_DISTRO: ubuntu1604
       MOLECULE_PLAYBOOK: playbook-latest.yml
 
     # Web Context.
-    - MOLECULE_DISTRO: ubuntu1804
+    - MOLECULE_DISTRO: ubuntu1604
       MOLECULE_PLAYBOOK: playbook-web-context.yml
 
 install:
