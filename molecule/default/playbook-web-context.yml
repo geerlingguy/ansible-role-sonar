@@ -3,6 +3,7 @@
 
   vars:
     sonar_web_context: "/sonar"
+    mysql_python_package_debian: python3-mysqldb
 
   pre_tasks:
     - name: Update apt cache.

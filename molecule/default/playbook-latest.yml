@@ -6,6 +6,7 @@
   vars:
     # Latest version of SonarQube, from http://www.sonarqube.org/downloads/
     sonar_version: 5.6.1
+    mysql_python_package_debian: python3-mysqldb
 
   pre_tasks:
     - name: Update apt cache.
