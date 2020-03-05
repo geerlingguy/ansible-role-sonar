@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/geerlingguy/ansible-role-sonar.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-sonar)
 
+> **DEPRECATED**: This role is no longer actively maintained. It may still work, but I have marked it as 'deprecated' on Ansible Galaxy, and recommend you find a new role to replace it, or fork it and use your fork.
+
 An Ansible Role that installs [SonarQube](http://www.sonarqube.org/) on RedHat/CentOS and Debian/Ubuntu Linux servers.
 
 ## Requirements
